@@ -46,11 +46,13 @@ class SOQLBatch extends Collection
         ];
     }
 
-    public function push($builder)
+    public function push(...$values)
     {
-        return tap($this, function($collection) use ($builder) {
-            $collection->batch($builder);
-        });
+        foreach ($values as $value) {
+        $this->items[] = $value;
+        }
+    
+        return $this;
     }
 
     /*public function put($tag, $builder)
